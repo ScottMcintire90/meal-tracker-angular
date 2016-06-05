@@ -1,7 +1,7 @@
-# GitHub Repo Finder
+# Meal Tracker
 
-#### An online app to view GitHub repositories
-#### May 27, 2016
+#### An online app to track meals
+#### June 3rd, 2016
 
 #### By Scott McIntire
 
