@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from 'angular2/core';
 import { MealComponent } from './meal.component';
-// import { NewMealComponent } from './new-meal.component';
+import { NewMealComponent } from './new-meal.component';
 import { Meal } from './meal.model';
 // import { EditMealDetailsComponent } from './edit-meal-details.component';
 // import { CaloricPipe } from './caloric.pipe';
@@ -9,13 +9,18 @@ import { Meal } from './meal.model';
   selector: 'meal-list',
   inputs: ['mealList'],
   // pipes: [caloricPipe],
-  directives: [MealComponent],
+  directives: [MealComponent, NewMealComponent],
   template:`
-    <meal-display *ngFor="#currentMeal of mealList"
-      (click)="mealClicked(currentMeal)"
-      [class.selected]="currentMeal === selectedMeal"
-      [meal]="currentMeal" [mealList]="mealList">
-    </meal-display>
+    <div class="col-md-6 mealList">
+      <meal-display *ngFor="#currentMeal of mealList"
+        (click)="mealClicked(currentMeal)"
+        [class.selected]="currentMeal === selectedMeal"
+        [meal]="currentMeal" [mealList]="mealList">
+      </meal-display>
+    </div>
+    <div class="col-md-6 addEdit">
+    <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
+    </div>
   `
 })
 export class MealListComponent {
@@ -26,9 +31,9 @@ export class MealListComponent {
   constructor() {
     this.onMealSelect = new EventEmitter();
   }
-  // createMeal(meal: Meal): void {
-  //   this.mealList.push(meal);
-  // }
+  createMeal(meal: Meal): void {
+    this.mealList.push(meal);
+  }
   mealClicked(clickedMeal: Meal): void {
     this.selectedMeal = clickedMeal;
     this.onMealSelect.emit(clickedMeal);
