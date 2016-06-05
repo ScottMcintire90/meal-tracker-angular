@@ -23,12 +23,15 @@ import { CaloriePipe } from './calorie.pipe';
         [class.selected]="currentMeal === selectedMeal"
         [meal]="currentMeal" [mealList]="mealList">
       </meal-display>
+      <h2>Total Calories</h2>
+      <button class="btn-success btn"(click)="totalCalories()">Calculate Total Calories:</button>
+      <h3>{{totalCals}}</h3>
     </div>
 
-      <div class="addMeal">
+      <div class="col-md-6 addMeal">
         <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
       </div>
-      <div *ngIf="selectedMeal" class="editMeal">
+      <div *ngIf="selectedMeal" class="col-md-6 editMeal">
         <edit-meal [meal]="selectedMeal"></edit-meal>
       </div>
 
@@ -39,6 +42,7 @@ export class MealListComponent {
   public onMealSelect: EventEmitter<Meal>;
   public selectedMeal: Meal;
   public filterCalorie: string="all";
+  public totalCals: number = 0;
 
   constructor() {
     this.onMealSelect = new EventEmitter();
@@ -52,5 +56,13 @@ export class MealListComponent {
   }
   onChange(filterOption) {
     this.filterCalorie = filterOption;
+  }
+  totalCalories(): void {
+    this.totalCals = 0;
+    var copyThis = this;
+    this.mealList.forEach(function(meal) {
+      copyThis.totalCals = meal.calories + copyThis.totalCals;
+      console.log(copyThis.totalCals);
+    });
   }
 }
