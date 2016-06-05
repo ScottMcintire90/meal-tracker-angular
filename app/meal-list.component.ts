@@ -12,13 +12,13 @@ import { CaloriePipe } from './calorie.pipe';
   directives: [MealComponent, NewMealComponent, EditMealComponent],
   template:`
     <div class="col-md-6 mealList">
-      <label>Filter By Genre</label>
+      <label>Filter By Calories</label>
       <select (change)="onChange($event.target.value)" class="filter">
         <option value="all">All Meals</option>
         <option value="under500">Meals under 500 calories</option>
         <option value="over500">Meals over 500 calories</option>
       </select>
-      <meal-display *ngFor="#currentMeal of mealList"
+      <meal-display *ngFor="#currentMeal of mealList | calorieSelect:filterCalorie"
         (click)="mealClicked(currentMeal)"
         [class.selected]="currentMeal === selectedMeal"
         [meal]="currentMeal" [mealList]="mealList">

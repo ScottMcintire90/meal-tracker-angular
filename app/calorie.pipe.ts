@@ -8,15 +8,19 @@ import {Meal} from './meal.model';
 export class CaloriePipe implements PipeTransform {
 
   transform(input: Meal[], args) {
+
     var desiredCalories = args[0];
-    if (desiredCalories === "all") {
-      return input;
-    } else if(desiredCalories == "under500") {
-      return input.filter(function(meal) => {
-        return meal.calories <= 499;
+
+    if (desiredCalories === "over500") {
+      return input.filter(function(meal) {
+        return meal.calories > 499;
+      });
+    } else if(desiredCalories === "under500") {
+      return input.filter((meal) => {
+        return meal.calories < 500;
       });
     } else {
-      return meal.calories >= 500;
+      return input
     }
   }
 }
