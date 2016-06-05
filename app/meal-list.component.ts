@@ -2,14 +2,14 @@ import { Component, EventEmitter } from 'angular2/core';
 import { MealComponent } from './meal.component';
 import { NewMealComponent } from './new-meal.component';
 import { Meal } from './meal.model';
-// import { EditMealDetailsComponent } from './edit-meal-details.component';
+import { EditMealComponent } from './edit-meal.component';
 // import { CaloricPipe } from './caloric.pipe';
 
 @Component({
   selector: 'meal-list',
   inputs: ['mealList'],
   // pipes: [caloricPipe],
-  directives: [MealComponent, NewMealComponent],
+  directives: [MealComponent, NewMealComponent, EditMealComponent],
   template:`
     <div class="col-md-6 mealList">
       <meal-display *ngFor="#currentMeal of mealList"
@@ -18,9 +18,14 @@ import { Meal } from './meal.model';
         [meal]="currentMeal" [mealList]="mealList">
       </meal-display>
     </div>
-    <div class="col-md-6 addEdit">
-    <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
-    </div>
+
+      <div class="addMeal">
+        <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
+      </div>
+      <div *ngIf="selectedMeal" class="editMeal">
+        <edit-meal [meal]="selectedMeal"></edit-meal>
+      </div>
+
   `
 })
 export class MealListComponent {

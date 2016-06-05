@@ -5,12 +5,12 @@ import { Meal } from './meal.model';
   selector: 'meal-display',
   inputs: ['meal', 'mealList'],
   template: `
-    <h3>{{ meal.name }}</h3>
-      <ul class="mealDetails">
-        <p><strong>Name: </strong>{{ meal.name }}</p>
-        <p><strong>Details: </strong>{{ meal.details }}</p>
-        <p><strong>Calories: </strong>{{ meal.calories }}</p>
-      </ul>
+    <ul class="mealDetails">
+      <h3>{{ meal.name }}</h3>
+      <p><strong>Name: </strong>{{ meal.name }}</p>
+      <p><strong>Details: </strong>{{ meal.details }}</p>
+      <p><strong>Calories: </strong>{{ meal.calories }}</p>
+    </ul>
   `
 })
 export class MealComponent {
